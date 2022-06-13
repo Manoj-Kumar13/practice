@@ -44,3 +44,24 @@ public:
         return min(dp[n-1],dp[n-2]);
     }
 };
+
+//space optimized solution
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n= cost.size();
+        
+        vector<int> dp(n+1);
+        
+        int p2 = cost[0];
+        int p1 = cost[1];
+        
+        for(int i=2; i<n; i++){
+            int cur = min(p1,p2) + cost[i];
+            p2 = p1;
+            p1 = cur;
+        }
+        
+        return min(p1,p2);
+    }
+};
