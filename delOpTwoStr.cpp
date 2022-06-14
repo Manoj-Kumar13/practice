@@ -12,7 +12,7 @@ public:
             return dp[n1][n2];
         }
         if(w1[0] == w2[0]){
-            return helper(w1.substr(1),n1-1,w2.substr(1),n2-1);
+            return dp[n1][n2] = helper(w1.substr(1),n1-1,w2.substr(1),n2-1);
         }
         
         return dp[n1][n2] = 1 + min(helper(w1.substr(1),n1-1,w2,n2),helper(w1,n1,w2.substr(1),n2-1));
