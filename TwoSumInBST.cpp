@@ -41,3 +41,25 @@ public:
     }
     
 };
+
+
+//another approach
+ bool findTarget(TreeNode* root, int k) {
+        unordered_set<int> s;
+        
+        return findAns(root,s,k);
+    }
+    
+    bool findAns(TreeNode* root, unordered_set<int>& s,int& k){
+        if(root == NULL){
+            return false;
+        }
+        
+        if(s.count(k-root->val)){
+            return true;
+        }
+        s.insert(root->val);
+        
+        return findAns(root->left, s, k) || findAns(root->right, s, k);
+        
+    }
