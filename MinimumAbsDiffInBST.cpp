@@ -33,3 +33,21 @@ public:
         inorder(root->right, arr);
     }
 };
+
+ int getMinimumDifference(TreeNode* root) {
+        int prev = INT_MAX;
+        int ans = INT_MAX;
+        inorder(root,prev,ans);
+        return ans;
+    }
+    
+    void inorder(TreeNode* root, int& prev, int& ans)   
+    {
+        if(root == NULL){
+            return;
+        }
+        inorder(root->left, prev, ans);
+        ans = min(ans,abs(prev-root->val));
+        prev = root->val;
+        inorder(root->right, prev, ans);
+    }
