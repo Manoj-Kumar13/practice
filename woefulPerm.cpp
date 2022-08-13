@@ -88,7 +88,7 @@
     int a[n+1];
 
     for(int i=1; i<=n ; i++){
-      a[i] = i ;
+      a[i] = i;
     }
 
     if(n%2 == 0){
