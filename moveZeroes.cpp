@@ -36,3 +36,23 @@ public:
         }
     }
 };
+
+//snowball approach
+class Solution {
+public:
+    void moveZeroes(vector<int>& a) {
+        int n = a.size();
+        
+        int zs = 0;
+        
+        for(int i=0; i<n; i++){
+            if(a[i] == 0){
+                zs++;
+            }else if(zs>0){
+                int temp = a[i];
+                a[i]=0;
+                a[i-zs]=temp;
+            }
+        }
+    }
+};
