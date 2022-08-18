@@ -32,3 +32,41 @@ public:
         return false;
     }
 };
+
+//another more simpler and faster approach
+class Solution {
+public:
+    
+    bool checkInclusion(string s1, string s2) {
+          if(s2.size()<s1.size()){
+              return false;
+          }
+        
+        vector<int> a(26,0);
+        vector<int> b(26,0);
+        int left = 0, right = 0;
+        
+        for(int i=0; i<s1.length(); i++){
+            a[s1[i]-'a']+=1;
+            b[s2[i]-'a']+=1;
+            right+=1;
+        }
+        
+        right -=1;        
+        
+        while(right<s2.length()){
+            if(a==b){
+                return true;
+            }
+            right+=1;
+            if(right != s2.length()){
+                b[s2[right]-'a']+=1;
+            }
+            b[s2[left]-'a']-=1;
+            left+=1;
+            
+        }
+        
+        return false;
+    }
+};
