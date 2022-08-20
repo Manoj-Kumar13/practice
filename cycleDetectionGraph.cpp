@@ -1,4 +1,6 @@
 #include<bits/stdc++.h>
+
+//bfs appraoch
 bool bfs(unordered_map<int,list<int>> &adjList,unordered_map<int,bool> &visited,int node){
     unordered_map<int,int> parent;
     queue<int> q;
@@ -24,6 +26,23 @@ bool bfs(unordered_map<int,list<int>> &adjList,unordered_map<int,bool> &visited,
     return false;
 }
 
+//dfs approach
+bool dfs(int node,int parent,unordered_map<int,list<int>> &adjList,unordered_map<int,bool> &visited){
+    visited[node] = true;
+    
+    for(auto i: adjList[node]){
+        if(!visited[i]){
+            bool isCycle = dfs(i,node,adjList,visited);
+            if(isCycle){
+                return true;
+            }
+        }else if(i != parent){
+            return true;
+        }
+    }
+    return false;
+}
+
 string cycleDetection (vector<vector<int>>& edges, int n, int m)
 {
     // Write your code here.
@@ -40,6 +59,7 @@ string cycleDetection (vector<vector<int>>& edges, int n, int m)
     for(int i=0; i<n; i++){
         if(!visited[i]){
             bool ans = bfs(adjList,visited,i);
+//             bool ans = dfs(i,-1,adjList,visited);
             if(ans){
                 return "Yes";
             }
