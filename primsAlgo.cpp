@@ -56,3 +56,62 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
     
     return ans;
 }
+
+//priority queue implimentation(nlogn)
+#include<bits/stdc++.h>
+#include<limits.h>
+vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+{
+    // Write your code here.
+    unordered_map<int, list<pair<int,int>>> adjList;
+    
+    for(int i=0; i<g.size(); i++){
+        int a = g[i].first.first;
+        int b = g[i].first.second;
+        int w = g[i].second;
+        adjList[a].push_back(make_pair(b,w));
+        adjList[b].push_back(make_pair(a,w));
+    }
+    
+    vector<int> parent(n+1);
+    vector<bool> mst(n+1);
+    vector<int> key(n+1);
+    
+    for(int i=0; i<=n; i++){
+        mst[i] = false;
+        key[i] = INT_MAX;    
+        parent[i] = -1;
+    }
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+
+    key[1] = 0;
+    parent[1] = -1;
+    pq.push({0,1});
+    
+    while(!pq.empty()){
+        int u = pq.top().second;
+        pq.pop();
+        
+        mst[u] = true;    
+        
+        for(auto i : adjList[u]){
+            int v = i.first;
+            int w = i.second;
+            if(mst[v] == false and w< key[v]){
+                key[v] = w;
+                pq.push({key[v],v});
+                parent[v] = u;
+            }
+        }
+    }
+    
+    vector<pair<pair<int, int>, int>> ans;
+    
+    for(int i=2; i<=n; i++){
+        ans.push_back({{parent[i],i},key[i]});
+    }
+    
+    return ans;
+}
+
+
