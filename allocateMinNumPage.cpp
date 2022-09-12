@@ -1,24 +1,40 @@
-int Solution::searchInsert(vector<int> &A, int B) {
-    // Do not write main() function.
-    // Do not read input, instead use the arguments to the function.
-    // Do not print the output, instead return values as specified
-    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
-    int left = 0,right=A.size()-1;
+bool isPossible(vector<int> arr, int n, int m,int mid){
+    int students = 1;
+    int sum = 0;
     
-    while(left<=right){
-        int mid = left + (right-left)/2;
-        
-        if(A[mid] == B){
-            return mid;
-        }
-        
-        if(A[mid]<B){
-            left = mid+1;
+    for(int i=0; i<n; i++){
+        if(arr[i] + sum <= mid){
+            sum+= arr[i];
         }else{
+            students++;
+            if(students>m || arr[i]>mid){
+                return false;
+            }
+            sum = arr[i];
+        }
+    }
+    return true;
+}
+
+int allocateBooks(vector<int> arr, int n, int m) {
+    // Write your code here.
+     int left = 0;
+    int right = 0;
+    for(int i=0; i<n; i++){
+        right+=arr[i];
+    }
+    
+    int ans = 0;
+    while(left<=right){
+        int mid = left+ (right-left)/2;
+        
+        if(isPossible(arr,n,m,mid)){
+            ans = mid;
             right = mid-1;
+        }else{
+            left = mid+1;
         }
     }
     
-    return left;
-    
+    return ans;
 }
