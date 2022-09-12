@@ -36,3 +36,48 @@ public:
         return -1;
     }
 };
+
+//alternative approach
+int getPivot(int *arr, int n){
+    int start = 0;
+    int end = n-1;
+    int mid = start + (end-start)/2;
+    
+    while(start<end){
+        if(arr[mid]>=arr[0]){
+            start = mid+1;
+        }else{
+            end = mid;
+        }
+         mid = start + (end-start)/2;
+    }
+    return start;
+}
+int binarySearch(int *arr, int left,int right, int k){
+    
+    while(left<=right){
+        int mid = left + (right-left)/2;
+        
+        if(arr[mid]== k){
+            return mid;
+        }
+        if(arr[mid] <k){
+            left = mid+1;
+        }else{
+            right = mid-1;
+        }
+    }
+    
+    return -1;
+    
+}
+int search(int* arr, int n, int key) {
+    // Write your code here.
+    int pivot = getPivot(arr,n);
+    
+    if(arr[pivot]<=key && arr[n-1]>=key){
+        return binarySearch(arr,pivot,n-1,key);
+    }else{
+        return binarySearch(arr,0,pivot,key);
+    }
+}
