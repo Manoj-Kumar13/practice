@@ -78,6 +78,6 @@ int search(int* arr, int n, int key) {
     if(arr[pivot]<=key && arr[n-1]>=key){
         return binarySearch(arr,pivot,n-1,key);
     }else{
-        return binarySearch(arr,0,pivot,key);
+        return binarySearch(arr,0,pivot-1,key);
     }
 }
