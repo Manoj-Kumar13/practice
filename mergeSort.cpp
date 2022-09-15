@@ -3,8 +3,8 @@ void merge(vector<int> &arr, int left, int right){
     int len1 = mid-left+1;
     int len2 = right - mid;
     
-    int first[len1];
-    int second[len2];
+    int *first = new int[len1];
+    int *second = new int[len2];
     
     int mr = left;
     for(int i=0; i<len1; i++){
@@ -12,7 +12,7 @@ void merge(vector<int> &arr, int left, int right){
         mr++;
     }
     
-    for(int i=0; i<len1; i++){
+    for(int i=0; i<len2; i++){
         second[i] = arr[mr];
         mr++;
     }
@@ -42,6 +42,8 @@ void merge(vector<int> &arr, int left, int right){
             idx2++;
             mr++;
     }
+    delete []first;
+    delete []second;
 }
 
 void mergeSort(vector<int> &arr,int left,int right){
