@@ -23,7 +23,7 @@ public:
 
 
 //another approach(clean code)
-void generateParenthesis(int opn, int cls, string output){
+void generateParentheses(int opn, int cls, string output){
 			if(cls == 0){
 				cout << output << endl;
 				return;
