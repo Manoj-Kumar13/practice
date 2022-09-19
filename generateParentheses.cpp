@@ -20,3 +20,29 @@ public:
         }
     }
 };
+
+
+//another approach(clean code)
+void generateParenthesis(int opn, int cls, string output){
+			if(cls == 0){
+				cout << output << endl;
+				return;
+			}
+
+			if(opn){
+				string op1 = output + "(";
+				subsets(opn-1,cls,op1);
+			}
+			if(cls-opn){
+				string op2 = output + ")";
+				subsets(opn,cls-1,op2);
+			}
+
+		}
+
+		void solve() {
+			int n;
+			cin >> n;
+
+			subsets(n,n, "");
+		}
