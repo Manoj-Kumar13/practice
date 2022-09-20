@@ -1,3 +1,4 @@
+//fails on 12 testcase on coding ninjas
 #include <bits/stdc++.h> 
 int findWays(vector<int> &a, int t)
 {
