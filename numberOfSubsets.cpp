@@ -28,3 +28,41 @@ int findWays(vector<int> &a, int t)
         
         return dp[n][t];
     }
+
+//passes all testcases
+int numberOfWays(int i, int sum, int n, vector<int> &num, vector<vector<int>> &dp)
+{
+
+    if (sum < 0)
+    {
+        return 0;
+    }
+
+    if (i == n)
+    {
+        if (sum == 0)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    if (dp[i][sum] != -1)
+    {
+        return dp[i][sum];
+    }
+
+    if(num[i] <= sum){
+         return dp[i][sum] =  numberOfWays(i + 1, sum - num[i], n, num, dp) + numberOfWays(i + 1, sum, n, num, dp);
+    }else{
+      return dp[i][sum] = numberOfWays(i + 1, sum, n, num, dp);
+    }
+}
+
+int findWays(vector<int> &num, int tar)
+{
+
+    int n = num.size();
+    vector<vector<int>> dp(n, vector<int>(tar + 1, -1));
+    return numberOfWays(0, tar, n, num, dp);
+}
