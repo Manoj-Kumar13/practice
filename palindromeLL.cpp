@@ -35,3 +35,24 @@ public:
         
     }
 };
+
+//recursive solution
+ListNode* mover = NULL;
+       ListNode* t=NULL;
+       bool func_recursive(ListNode* mover)
+       {
+            if (!mover){
+                return true;
+            }
+            bool part_ans = func_recursive(mover->next) && (mover->val == t->val);
+            t = t->next;
+            return part_ans;
+       }
+    
+    bool isPalindrome(ListNode* head) {
+         mover = head;
+         t = head;
+         return func_recursive(mover);
+        
+        
+    }
