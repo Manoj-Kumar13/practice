@@ -107,3 +107,22 @@ public:
 
     }
 };
+
+//space optimized
+int minCostClimbingStairs(vector<int>& cost) {
+        int n= cost.size();
+        if( n < 2){
+            return 0;
+        }
+
+        int p1 = min(cost[1],cost[0]);
+        int p2 = 0;
+        
+        for(int i=3; i<=n; i++){
+            int temp = min(cost[i-1] + p1,cost[i-2] + p2);
+            p2 = p1;
+            p1 = temp;
+        }
+        return p1;
+
+    }
