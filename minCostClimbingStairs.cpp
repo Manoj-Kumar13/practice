@@ -65,3 +65,45 @@ public:
         return min(p1,p2);
     }
 };
+
+
+//another appraoch
+class Solution {
+public:
+    int helper(int n, vector<int> &cost, vector<int> &dp){
+        if(n == 2){
+            return min(cost[n-1],cost[n-2]);
+        }
+        
+        if(n < 2){
+            return 0;
+        }
+        
+        if(dp[n] != -1){
+            return dp[n];
+        }
+        
+        return dp[n] =  min(cost[n-1] + helper(n-1,cost,dp),cost[n-2] + helper(n-2,cost,dp));
+    }
+    
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n= cost.size();
+        
+        vector<int> dp(n+1,-1);
+        
+        // return helper(n,cost,dp);
+        
+        vector<int> dp2(n+1);
+        
+        for(int i=0; i<2; i++){
+            dp2[i] = 0;
+        }
+        dp2[2] = min(cost[1],cost[0]);
+        
+        for(int i=3; i<=n; i++){
+            dp2[i] = min(cost[i-1] + dp2[i-1],cost[i-2] + dp2[i-2]);
+        }
+        return dp2[n];
+
+    }
+};
