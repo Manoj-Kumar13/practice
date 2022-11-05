@@ -39,3 +39,31 @@
         
         return 1+ max(maxDepth(root->left),maxDepth(root->right));
     }
+
+//another appraoch
+int solve(Node* root, int &res){
+    if(!root){
+        return 0;
+    }
+    
+    int lh = solve(root->left, res);
+    int rh = solve(root->right, res);
+    
+    int temp = 1 + max(lh,rh);
+    int tempAns =  1 + lh + rh;
+    
+    res = max(res,tempAns);
+    
+    return temp;
+}
+
+class Solution {
+  public:
+    int diameter(Node* root) {
+        // Your code here
+        vector<vector<int>> dp();
+        int res = 0;
+        solve(root,res);
+        return res;
+    }
+};
