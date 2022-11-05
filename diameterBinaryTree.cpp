@@ -1,4 +1,5 @@
- int diameterOfBinaryTree(TreeNode* root) {
+//if diameter consists of no. of edges b/w nodes 
+int diameterOfBinaryTree(TreeNode* root) {
         if(!root){
             return 0;
         }
@@ -40,7 +41,7 @@
         return 1+ max(maxDepth(root->left),maxDepth(root->right));
     }
 
-//another appraoch
+//another appraoch (if diameter consists of no. of nodes)
 int solve(Node* root, int &res){
     if(!root){
         return 0;
