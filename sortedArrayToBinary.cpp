@@ -34,3 +34,32 @@ public:
         
     }
 };
+
+// ques link for above : https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+
+// return in the form of an array
+class Solution {
+public:
+    vector<int> helper(vector<int>& nums, int left, int right,vector<int> &ans){
+        if(left>right){
+            return ans;
+        }
+        
+        int mid = left + (right-left)/2;
+        
+        ans.push_back(nums[mid]);
+        
+        helper(nums, left, mid-1, ans);
+        helper(nums, mid+1, right, ans);
+        
+        return ans;
+        
+    }
+    vector<int> sortedArrayToBST(vector<int>& nums) {
+        // Code here
+        vector<int> ans;
+        return helper(nums, 0 , nums.size()-1, ans);
+    }
+};
+
+// ques link for above : https://practice.geeksforgeeks.org/problems/array-to-bst4443/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
